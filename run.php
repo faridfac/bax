@@ -1,5 +1,5 @@
 <?php
-ulang:
+awal:
 $uuid = gen_uuid();
 $name = nama();
 $pecah = explode(" ",$name);
@@ -38,7 +38,7 @@ $verify = verify($token, $code);
 echo "$verify\n";
 $profile = profile_save($first, $token);
 echo "$profile\n\n";
-goto ulang;
+goto awal;
 
 
 function regis($email, $uuid){
