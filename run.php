@@ -109,6 +109,28 @@ function verify($token, $code){
   $result = curl_exec($ch);
   return $result;
 }
+/**
+     * Get random name
+     */
+    function randomuser() {
+        randomuser:
+        echo "[i] ".date('H:i:s')." | Generating name...\n";
+        $randomuser = file_get_contents('https://econxn.id/api/v1/randomUser/?quantity=20');
+        if($randomuser) {
+            $json = json_decode($randomuser);
+            if($json->status->code == 200) {
+                return $json->result;
+            } else {
+                echo "[!] ".date('H:i:s')." | Failure while generating name!\n";
+                sleep(2);
+                goto randomuser;
+            }        
+        } else {        
+            sleep(2);
+            goto randomuser;
+        }
+    }
+
 
 function profile_save($first, $token){
   $ch = curl_init();
