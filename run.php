@@ -9,6 +9,29 @@ $domain = "luffem.com";
 $mail = strtolower(str_replace(" ", "", $name).mt_rand(10, 9999));
 $email = $mail."@".$domain;
 
+function new_email($username) {
+
+        $method   = 'POST';
+        $header   =  [
+            'Content-Type: application/json;charset=utf-8'
+        ];
+        $endpoint = 'https://api.internal.temp-mail.io/api/v2/email/new';
+
+        // $param = '{"name":"'.$username.'"}'; //Custome email 
+
+        $domain= ['inscriptio.in', 'montokop.pw', 'smart-email.me'];
+        $param = '{"name":"'.$username.'","domain":"'.$domain[rand(0,2)].'"}'; //full email
+
+        $email = $this->request ($method, $endpoint, $param, $header);
+   
+        $json = json_decode($email);
+
+        if(empty($json->email)) {
+            return FALSE;
+        } else {
+            return $json->email;
+        }
+    }
 
 $regis = regis($email, $uuid);
 echo "$regis\n$email\n";
